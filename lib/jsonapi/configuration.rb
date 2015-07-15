@@ -69,7 +69,10 @@ module JSONAPI
 
     def operations_processor=(operations_processor)
       @operations_processor_name = operations_processor
-      @operations_processor = JSONAPI::OperationsProcessor.operations_processor_for(@operations_processor_name)
+      @operations_processor =
+        JSONAPI::OperationsProcessor.operations_processor_for(
+          @operations_processor_name
+        )
     end
 
     attr_writer :allowed_request_params

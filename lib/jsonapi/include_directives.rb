@@ -40,7 +40,8 @@ module JSONAPI
       current = @include_directives_hash
       current_path.split('.').each do |fragment|
         fragment = fragment.to_sym
-        current[:include_related][fragment] ||= { include: false, include_related: {} }
+        current[:include_related][fragment] ||=
+          { include: false, include_related: {} }
         current = current[:include_related][fragment]
       end
       current
