@@ -10,49 +10,26 @@ module JSONAPI
       after_filter :setup_response
     end
 
-    def index
-      process_request_operations
+    def process_request_operations
+      operation_results = create_operations_processor.process(@request)
+      render_results(operation_results)
+    rescue => e
+      handle_exceptions(e)
     end
-
-    def show
-      process_request_operations
-    end
-
-    def show_association
-      process_request_operations
-    end
-
-    def create
-      process_request_operations
-    end
-
-    def create_association
-      process_request_operations
-    end
-
-    def update_association
-      process_request_operations
-    end
-
-    def update
-      process_request_operations
-    end
-
-    def destroy
-      process_request_operations
-    end
-
-    def destroy_association
-      process_request_operations
-    end
-
-    def get_related_resource
-      process_request_operations
-    end
-
-    def get_related_resources
-      process_request_operations
-    end
+    %i[
+      index
+      show
+      show_association
+      create
+      create_association
+      update
+      update_association
+      destroy
+      destroy_association
+      get_related_resource
+      get_related_resources
+    ].each { |method| alias_method method, :process_request_operations }
+    private :process_request_operations
 
     # set the operations processor in the configuration or override this to use another operations processor
     def create_operations_processor
@@ -152,13 +129,6 @@ module JSONAPI
         resource_serializer_klass: resource_serializer_klass,
         request: @request
       )
-    end
-
-    def process_request_operations
-      operation_results = create_operations_processor.process(@request)
-      render_results(operation_results)
-    rescue => e
-      handle_exceptions(e)
     end
 
     # override this to process other exceptions
