@@ -3,9 +3,7 @@ class ActiveRecordOperationsProcessor < JSONAPI::OperationsProcessor
 
   def transaction
     if @transactional
-      ActiveRecord::Base.transaction do
-        yield
-      end
+      ActiveRecord::Base.transaction { yield }
     else
       yield
     end
