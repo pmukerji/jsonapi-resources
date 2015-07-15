@@ -107,7 +107,7 @@ module JSONAPI
     end
 
     def module_scopes_from_class(klass)
-      klass.name.to_s.split("::")[0...-1]
+      klass.name.to_s.split('::')[0...-1]
     end
 
     def regular_primary_resources_path
