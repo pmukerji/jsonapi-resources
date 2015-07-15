@@ -29,7 +29,8 @@ module JSONAPI
       #:basic, :active_record, or custom
       self.operations_processor = :active_record
 
-      self.allowed_request_params = [:include, :fields, :format, :controller, :action, :sort, :page]
+      self.allowed_request_params =
+        %i[include fields format controller action sort page]
 
       # :none, :offset, :paged, or a custom paginator name
       self.default_paginator = :none

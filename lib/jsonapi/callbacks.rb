@@ -13,7 +13,7 @@ module JSONAPI
       def define_jsonapi_resources_callbacks(*callbacks)
         options = callbacks.extract_options!
         options = {
-          only: [:before, :around, :after]
+          only: %i[before around after]
         }.merge!(options)
 
         types = Array(options.delete(:only))
