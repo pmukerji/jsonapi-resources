@@ -21,9 +21,7 @@ module JSONAPI
 
     def initialize(includes_array)
       @include_directives_hash = { include_related: {} }
-      includes_array.each do |include|
-        parse_include(include)
-      end
+      includes_array.each { |include| parse_include(include) }
     end
 
     def include_directives

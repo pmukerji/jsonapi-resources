@@ -99,11 +99,7 @@ module JSONAPI
     def formatted_module_path_from_class(klass)
       scopes = module_scopes_from_class(klass)
 
-      unless scopes.empty?
-        "/#{ scopes.map(&:downcase).join('/') }/"
-      else
-        "/"
-      end
+      scopes.empty? ? '/' : "/#{ scopes.map(&:downcase).join('/') }/"
     end
 
     def module_scopes_from_class(klass)
